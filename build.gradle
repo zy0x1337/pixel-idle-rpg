@@ -5,7 +5,8 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath("com.android.tools.build:android-gradle-plugin:8.5.2")
+        // Correct artifact: com.android.tools.build:gradle (NOT android-gradle-plugin)
+        classpath("com.android.tools.build:gradle:8.5.2")
         classpath("org.jetbrains.kotlin:kotlin-gradle-plugin:2.0.21")
     }
 }
