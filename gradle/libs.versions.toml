@@ -1,0 +1,52 @@
+[versions]
+libgdx            = "1.14.1"
+kotlin             = "2.0.21"
+ktx                = "1.12.1-rc1"
+fleks              = "2.10"
+androidGradlePlugin = "8.5.2"
+androidMinSdk      = "26"
+androidTargetSdk   = "35"
+androidCompileSdk  = "35"
+kotlinxSerialization = "1.7.3"
+kotlinxCoroutines  = "1.9.0"
+
+[libraries]
+libgdx-core        = { module = "com.badlogicgames.gdx:gdx",                version.ref = "libgdx" }
+libgdx-android     = { module = "com.badlogicgames.gdx:gdx-backend-android", version.ref = "libgdx" }
+# Android natives — classifier must be declared in build.gradle, NOT here (Gradle 8+ restriction)
+# In android/build.gradle use:
+#   natives("com.badlogicgames.gdx:gdx-platform:$libgdxVersion:natives-armeabi-v7a")
+#   natives("com.badlogicgames.gdx:gdx-platform:$libgdxVersion:natives-arm64-v8a")
+#   natives("com.badlogicgames.gdx:gdx-platform:$libgdxVersion:natives-x86")
+#   natives("com.badlogicgames.gdx:gdx-platform:$libgdxVersion:natives-x86_64")
+libgdx-android-natives-armeabi-v7a = { module = "com.badlogicgames.gdx:gdx-platform", version.ref = "libgdx" }
+libgdx-android-natives-arm64-v8a   = { module = "com.badlogicgames.gdx:gdx-platform", version.ref = "libgdx" }
+libgdx-android-natives-x86         = { module = "com.badlogicgames.gdx:gdx-platform", version.ref = "libgdx" }
+libgdx-android-natives-x86-64      = { module = "com.badlogicgames.gdx:gdx-platform", version.ref = "libgdx" }
+libgdx-lwjgl3      = { module = "com.badlogicgames.gdx:gdx-backend-lwjgl3", version.ref = "libgdx" }
+# Desktop natives — same fix, use string in desktop/build.gradle:
+#   runtimeOnly("com.badlogicgames.gdx:gdx-platform:$libgdxVersion:natives-desktop")
+libgdx-lwjgl3-natives = { module = "com.badlogicgames.gdx:gdx-platform",   version.ref = "libgdx" }
+
+ktx-app            = { module = "io.github.libktx:ktx-app",          version.ref = "ktx" }
+ktx-assets         = { module = "io.github.libktx:ktx-assets",       version.ref = "ktx" }
+ktx-assets-async   = { module = "io.github.libktx:ktx-assets-async", version.ref = "ktx" }
+ktx-graphics       = { module = "io.github.libktx:ktx-graphics",     version.ref = "ktx" }
+ktx-math           = { module = "io.github.libktx:ktx-math",         version.ref = "ktx" }
+ktx-log            = { module = "io.github.libktx:ktx-log",          version.ref = "ktx" }
+ktx-scene2d        = { module = "io.github.libktx:ktx-scene2d",      version.ref = "ktx" }
+ktx-style          = { module = "io.github.libktx:ktx-style",        version.ref = "ktx" }
+ktx-collections    = { module = "io.github.libktx:ktx-collections",  version.ref = "ktx" }
+ktx-async          = { module = "io.github.libktx:ktx-async",        version.ref = "ktx" }
+
+fleks              = { module = "io.github.quillraven.fleks:Fleks",   version.ref = "fleks" }
+
+kotlinx-serialization-json = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinxSerialization" }
+kotlinx-coroutines-core    = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core",    version.ref = "kotlinxCoroutines" }
+kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlinxCoroutines" }
+
+[plugins]
+kotlin-jvm           = { id = "org.jetbrains.kotlin.jvm",                           version.ref = "kotlin" }
+kotlin-android       = { id = "org.jetbrains.kotlin.android",                       version.ref = "kotlin" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization",          version.ref = "kotlin" }
+android-application  = { id = "com.android.application",                            version.ref = "androidGradlePlugin" }
