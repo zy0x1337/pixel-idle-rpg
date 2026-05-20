@@ -1,0 +1,47 @@
+# Gradle
+.gradle/
+build/
+*/build/
+
+# Android
+*.apk
+*.aab
+*.ap_
+*.dex
+local.properties
+
+# IntelliJ / Android Studio
+.idea/
+*.iml
+*.iws
+*.ipr
+out/
+.DS_Store
+
+# Kotlin
+*.class
+*.jar
+!gradle-wrapper.jar
+
+# libGDX
+assets/
+!assets/.gitkeep
+!assets/sprites/.gitkeep
+!assets/tilemaps/.gitkeep
+!assets/ui/.gitkeep
+!assets/sounds/.gitkeep
+
+# OS
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+.DS_Store
+.Spotlight-V100
+.Trashes
+
+# Generated
+gen/
+bin/
+
+# Logs
+*.log
