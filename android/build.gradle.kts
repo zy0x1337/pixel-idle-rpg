@@ -42,14 +42,19 @@ dependencies {
     implementation(project(":core"))
 
     implementation(libs.libgdx.android)
-    natives(libs.libgdx.android.natives.armeabi.v7a)
-    natives(libs.libgdx.android.natives.arm64.v8a)
-    natives(libs.libgdx.android.natives.x86)
-    natives(libs.libgdx.android.natives.x86.64)
+
+    // Gradle 8+ does not support 'classifier' in Version Catalog entries.
+    // Natives must be declared as full GAV strings with classifier appended.
+    val gdx = libs.versions.libgdx.get()
+    natives("com.badlogicgames.gdx:gdx-platform:$gdx:natives-armeabi-v7a")
+    natives("com.badlogicgames.gdx:gdx-platform:$gdx:natives-arm64-v8a")
+    natives("com.badlogicgames.gdx:gdx-platform:$gdx:natives-x86")
+    natives("com.badlogicgames.gdx:gdx-platform:$gdx:natives-x86_64")
 
     implementation(libs.kotlinx.coroutines.android)
 }
 
+// Unpacks native .so files from the platform JARs into jniLibs so Android can find them.
 fun DependencyHandlerScope.natives(dependency: Any) {
     implementation(dependency)
 }
