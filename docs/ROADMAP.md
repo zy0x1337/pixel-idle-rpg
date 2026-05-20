@@ -3,17 +3,17 @@
 
 ---
 
-## Phase 0 — Foundation ✅ (Current)
+## Phase 0 — Foundation ✅
 > Repo setup, planning, stack decisions
 
 - [x] GitHub repository created
 - [x] Project structure defined
 - [x] GDD drafted
-- [x] Tech stack confirmed (libGDX + Kotlin + KTX + Fleks)
+- [x] Tech stack confirmed (libGDX 1.14.1 + Kotlin + KTX + Fleks)
 - [ ] Decide world setting / art direction
-- [ ] Initialize libGDX project via gdx-liftoff
-- [ ] Set up `develop` branch
-- [ ] Configure `.github/workflows` for build CI
+- [x] Initialize libGDX project structure (gdx-liftoff equivalent)
+- [x] Set up `develop` branch
+- [x] Configure `.github/workflows` for build CI
 
 ---
 
@@ -21,25 +21,44 @@
 > Goal: Something playable on device. 1 hero, auto-fight, basic loop.
 
 ### Engine & Architecture
-- [ ] libGDX project via gdx-liftoff (Kotlin + Android + KTX + Fleks)
-- [ ] Screen Manager (Main Menu → Game Screen)
-- [ ] Game Loop (fixed timestep, delta time)
-- [ ] Asset Manager setup (AssetManager + KTX async loading)
-- [ ] Basic logging + crash handling
+- [x] libGDX project: core / android / lwjgl3 modules
+- [x] Screen Manager (KtxGame: Loading → MainMenu → Game)
+- [x] Asset Manager setup skeleton (AssetManager via KTX)
+- [x] Basic logging (KTX logger)
+- [ ] Gradle wrapper binary committed (`gradlew` + `gradlew.bat`)
 
-### Gameplay
-- [ ] 1 Hero (Warrior) with HP, ATK, DEF
-- [ ] Auto-combat system (tick-based)
-- [ ] 3 enemy types (Zone 1: Forest)
-- [ ] Gold drop system
-- [ ] Basic shop (buy ATK/DEF upgrade)
-- [ ] Simple save system (libGDX Preferences)
+### Domain Models
+- [x] Stats, HeroClass (5 classes)
+- [x] ItemRarity, Item, ItemSlot
+- [x] Zone (5 zones with gold multipliers)
 
-### Art (Placeholder)
-- [ ] 16×16 Hero sprite (walk + attack animation)
-- [ ] 3× Enemy sprites
-- [ ] Basic tilemap (Forest zone, Tiled)
-- [ ] UI skin (Scene2D / KTX)
+### ECS — Fleks Systems
+- [x] `HeroComponent`, `EnemyComponent`, `CombatComponent`
+- [x] `SpawnSystem` — spawns enemies, boss every 10 kills
+- [x] `CombatSystem` — auto-attack tick, hero vs enemy
+- [x] `RewardSystem` — gold + EXP distribution, level-up
+- [x] `LootSystem` — weighted rarity drop rolls
+- [x] `HeroRespawnSystem` — 5s revive after KO
+- [x] `CombatWorld` — assembles full Fleks world from SaveGame
+
+### GameScreen
+- [x] Wired `CombatWorld` into `GameScreen.render(delta)`
+- [x] Combat + Reward event handlers
+- [x] Auto-save on screen hide
+- [x] Offline reward calculation on screen show
+
+### Save System
+- [x] `SaveGame` + `SavedHero` (kotlinx.serialization)
+- [x] `SaveManager` (libGDX Preferences JSON)
+- [x] Offline reward calculator (up to 8h, 50% efficiency)
+
+### Gameplay (Remaining for MVP)
+- [ ] SpriteBatch rendering (hero + enemy pixel sprites)
+- [ ] Tilemap rendering (Zone 1 Tiled map)
+- [ ] HUD: HP bars, gold counter, wave indicator
+- [ ] Active ability button (1 per hero class)
+- [ ] Shop screen (buy ATK/DEF upgrades)
+- [ ] First placeholder pixel sprites in assets/
 
 ### Milestone: First playable APK on device
 
@@ -48,15 +67,13 @@
 ## Phase 2 — Alpha v0.2 🔒
 > Goal: Real game feel. Multiple classes, world map, inventory.
 
-- [ ] 3 hero classes (Warrior, Mage, Ranger)
-- [ ] Full tilemap world (2–3 zones)
+- [ ] Full tilemap world (2–3 zones, Tiled)
 - [ ] Inventory system (equipment slots + items)
-- [ ] Equipment drop system (rarities)
-- [ ] Hero panel UI (stats, equipment slots)
+- [ ] Equipment drop pop-up UI
+- [ ] Hero panel (stats, equipment, level bar)
 - [ ] World map / zone selection screen
-- [ ] EXP + Leveling system
-- [ ] Animated gold counter
-- [ ] Sound: BGM (chiptune) + SFX hits
+- [ ] Animated gold counter (number tween)
+- [ ] Sound: chiptune BGM loop + SFX (hit, level-up, gold)
 
 ### Milestone: Shareable screenshot / screen recording
 
@@ -65,15 +82,13 @@
 ## Phase 3 — Beta v0.3 🔒
 > Goal: Testable by others. Full loop with endgame.
 
-- [ ] Dungeon system (floors, wave progression)
-- [ ] Boss encounters (phase mechanics)
-- [ ] Offline progress calculation
-- [ ] "Welcome back" summary screen
+- [ ] Dungeon system (floor/wave progression)
+- [ ] Boss encounter phase mechanics
+- [ ] Offline progress — "Welcome back" overlay
 - [ ] Base building (3 buildings)
-- [ ] Prestige system (basic)
-- [ ] Active abilities (1 per hero class)
-- [ ] 5 hero classes complete
-- [ ] Balancing pass on economy
+- [ ] Prestige system
+- [ ] 5 hero classes fully implemented
+- [ ] Economy balancing pass
 - [ ] Google Play internal testing track
 
 ### Milestone: Beta APK distributed for testing
@@ -85,14 +100,13 @@
 
 - [ ] Full prestige system with permanent upgrades
 - [ ] Story: 5 chapters × 3 boss fights
-- [ ] All 5 zones complete (art + enemies)
-- [ ] Full audio (BGM + SFX + UI sounds)
+- [ ] All 5 zones complete
+- [ ] Full audio
 - [ ] Achievements system
-- [ ] Settings screen (audio, graphics, data reset)
-- [ ] Play Store listing (screenshots, description, icon)
-- [ ] Privacy Policy
-- [ ] Performance profiling (target: 60fps on mid-range devices)
-- [ ] Crash reporting (Firebase Crashlytics)
+- [ ] Settings screen
+- [ ] Play Store listing + Privacy Policy
+- [ ] Performance profiling (60fps mid-range)
+- [ ] Firebase Crashlytics
 
 ### Milestone: Play Store release 🚀
 
@@ -102,5 +116,5 @@
 - Guild system / social features
 - PvP leaderboards
 - Seasonal events
-- New hero classes (Necromancer, Paladin)
+- New classes (Necromancer, Paladin)
 - Cloud save (Google Play Games)
